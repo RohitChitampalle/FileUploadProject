@@ -18,7 +18,12 @@
 .env.DB_PASSWORD
 .env.DB_DATABASE
 .env.DB_PORT
-env.JWT_SECRET_KEY
+.env.JWT_SECRET_KEY
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 
 npm-debug.log*
