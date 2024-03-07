@@ -52,25 +52,37 @@ let UserRegister = (req, res) => {
     try {
         let data = req.body;
 
+     
+   if (data.first_name === "", data.last_name === "", data.email === "", data.password === "") {
+     const error = new Error('One or more required fields are missing');
+     error.status = 400;
+     return res.status(400).json({
+         "Error": "One or more required fields are missing"
+   });
 
-        //change is column name closed/08-02-2024.
+   }else{
 
-        let query = ` INSERT INTO User (first_name, last_name,email,created_date,password) 
-        VALUES("${data.first_name}", "${data.last_name}", "${data.email}", "${data.created_date}", "${data.password}")
-        `
-        connection.query(query, (err, results) => {
-            if (err) {
-                console.error('Error querying database:', err);
-                return res.status(501).json([{
-                    "Error": err.sqlMessage
-                }]);
-            }
-            //    console.log('Query results:', results);
-            return res.status(201).json({
-                "status": "data inserted successFul",
-                "id": results.lastIndexOf
-            })
-        });
+       //change is column name closed/08-02-2024.
+    
+       let query = ` INSERT INTO User (first_name, last_name,email,password) 
+       VALUES("${data.first_name}", "${data.last_name}", "${data.email}", "${data.password}")
+       `
+       connection.query(query, (err, results) => {
+           if (err) {
+               console.error('Error querying database:', err);
+               return res.status(501).json([{
+                   "Error": err.sqlMessage
+               }]);
+           }
+           //    console.log('Query results:', results);
+           return res.status(201).json({
+               "status": "data inserted successFul",
+               "id": results.lastIndexOf
+           })
+       });
+   }
+
+
 
     } catch (error) {
         return [{
@@ -109,7 +121,7 @@ let userLogin = (req, res) => {
 
             res.json({
                 "token": token,
-                "id": user.id
+                "id": user.user_id
             })
         });
 

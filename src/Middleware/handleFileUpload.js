@@ -1,11 +1,12 @@
 const multer = require('multer');
 
 
-// Configure Multer to handle form data
-const storage = multer.memoryStorage();
-const upload = multer({
-    storage: storage
+// Set up Multer for file uploads
+const multerConfig = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024, // 5 MB limit (adjust as needed)
+    },
 });
 
-
-module.exports = upload
+module.exports = multerConfig

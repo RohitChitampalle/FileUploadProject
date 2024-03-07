@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require('cors');
 const dotenv = require('dotenv')
 
-const port = 8011;
+const port = 8013;
 
 //db connection 
 
@@ -11,7 +11,7 @@ const connection = require("./src/Models/index");
 
 // //routes
 const UserRouter = require("./src/Routes/index")
-// const bookRouter = require("./routes/book")
+const UploadFile = require("./src/Routes/uploadFile")
 
 const app = express()
 
@@ -23,7 +23,7 @@ app.use(cors());
 
 //Routes
 app.use("/api/user/", UserRouter)
-// app.use("/api/book/", bookRouter)
+app.use("/api/file/", UploadFile)
 
 
 app.listen(port, () => {
