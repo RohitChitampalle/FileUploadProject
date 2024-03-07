@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization');
-    console.log("backend token", token)
-
 
     //error handling 
 
@@ -21,7 +19,6 @@ const verifyToken = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        console.log("decode", decoded)
         req.user = decoded.user;
         next();
     } catch (error) {
